@@ -38,35 +38,7 @@ app.directive("passwordVerify", function() {
      }
    };
 });
-app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$http,$sce,$window,$http, $log,$document,Auth,$firebaseAuth) {
-  $scope.loginForm=true;
-  $scope.signUp=function () {
-    $scope.loginForm=false;
-    $scope.loginSignupToggle='yes';
-  }
-  $scope.createUser = function(email,password) {
-    $scope.message = null;
-    $scope.error = null;
-    // Create a new user
-    Auth.$createUserWithEmailAndPassword(email, password)
-      .then(function(firebaseUser) {
-        $scope.message = "User created with uid: " + firebaseUser.uid;
-      }).catch(function(error) {
-        $scope.error = error;
-      });
-  };
-  $scope.signIn = function(email,password){
-  Auth.$signInWithEmailAndPassword(email,password).then(function(firebaseUser){
-    console.log(firebaseUser.uid);
-    $location.path("/account");
-  })
-  .catch(function(error) {
 
-    var errorCode = error.code;
-    var errorMessage = error.message;
-  });
-}
-});
 // for ngRoute
 app.run(["$rootScope", "$location", function($rootScope, $location) {
   $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
@@ -90,9 +62,9 @@ app.config(["$routeProvider", function($routeProvider) {
         return Auth.$waitForSignIn();
       }]
     }
-  }).when("/account", {
+  }).when("/home", {
     // the rest is the same for ui-router and ngRoute...
-    controller: "AccountCtrl",
+    controller: "HomeCtrl",
     templateUrl: "template/dashboard.html",
     resolve: {
       // controller will not be loaded until $requireSignIn resolves
@@ -105,10 +77,56 @@ app.config(["$routeProvider", function($routeProvider) {
     }
   });
 }]);
+app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$http,$sce,$window,$http, $log,$document,Auth,$firebaseAuth) {
+  $scope.loginForm=true;
+  $scope.signUp=function () {
+    $scope.loginForm=false;
+    $scope.loginSignupToggle='yes';
+  }
+  if(Auth.$getAuth()){
+    $location.path("/home");
+  }
+  else if(Auth.$getAuth()==null){
+    $location.path("/");
+  }
+  $scope.createUser = function(email,password) {
+    $scope.message = null;
+    $scope.error = null;
+    // Create a new user
+    Auth.$createUserWithEmailAndPassword(email, password)
+      .then(function(firebaseUser) {
+        $scope.message = "User created with uid: " + firebaseUser.uid;
+      }).catch(function(error) {
+        $scope.error = error;
+      });
+  };
+  $scope.signIn = function(email,password){
+    Auth.$signInWithEmailAndPassword(email,password).then(function(firebaseUser){
+      console.log(firebaseUser.uid);
+      $location.path("/home");
+    })
+    .catch(function(error) {
 
-app.controller("HomeCtrl", ["currentAuth", function(currentAuth) {
-  // currentAuth (provided by resolve) will contain the
-  // authenticated user or null if not signed in
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+  }
+});
+app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$window','$http', '$log','$document','Auth', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$window,$http, $log,$document,Auth) {
+  console.log(currentAuth);
+  // any time auth state changes, add the user data to scope
+   Auth.$onAuthStateChanged(function(firebaseUser) {
+     $scope.firebaseUser = firebaseUser;
+     console.log($scope.firebaseUser);
+   });
+   $scope.signOut=function () {
+     Auth.$signOut();
+     Auth.$onAuthStateChanged(function(firebaseUser) {
+       if(firebaseUser==null){
+           $location.path("/");
+       }
+     });
+   }
 }]);
 
 app.controller("AccountCtrl", ["currentAuth", function(currentAuth) {
