@@ -114,7 +114,7 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
 });
 app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$window','$http', '$log','$document','Auth', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$window,$http, $log,$document,Auth) {
   console.log(currentAuth);
-  // any time auth state changes, add the user data to scope
+  $scope.results=[];
    Auth.$onAuthStateChanged(function(firebaseUser) {
      $scope.firebaseUser = firebaseUser;
      console.log($scope.firebaseUser);
@@ -127,6 +127,55 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
        }
      });
    }
+   var $apiEndpoint  = 'https://api.themoviedb.org/3/',
+    $apiKey = 'b902673ede213dbd0636564e16adedc2',
+    $error_noData = 'Uups! No connection to the database.';
+    var $url = $apiEndpoint;
+    $scope.searchPopular=function () {
+      $url += 'movie/popular';
+      $http({
+           method: 'GET',
+           url: $url,
+           params: {
+              api_key: $apiKey
+            }
+         }).then(function successCallback(response) {
+           console.log(response);
+           $scope.results=response.data.results;
+           }, function errorCallback(response) {
+             console.log(response);
+       });
+
+    };
+
+   $scope.searchQuery=function (search) {
+      var $url = $apiEndpoint;
+      $url += 'search/multi';
+     $http({
+          method: 'GET',
+          url: $url,
+          params: {
+             api_key: $apiKey,
+             query:search
+           }
+        }).then(function successCallback(response) {
+          console.log(response);
+            // for (var i=0; i<response.data.results.length; i++){
+            // }
+          $scope.results=response.data.results;
+          // console.log(response.data.results[0].genre_ids.length);
+            for (var i=0; i<response.data.results.length; i++){
+
+                  console.log(response.data.results[i]);
+
+            };
+          }, function errorCallback(response) {
+            console.log(response);
+      });
+
+   }
+     // Get data from API
+     $scope.searchPopular();
 }]);
 
 app.controller("AccountCtrl", ["currentAuth", function(currentAuth) {
