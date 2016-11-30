@@ -7,9 +7,9 @@
   width: 100%;
   position: fixed;
   z-index:20;
-      background: linear-gradient(90deg, #1e2931 0%, #384c59 75%);
+  background: linear-gradient(90deg, #1e2931 0%, #384c59 75%);
   transition: all ease-in .3s;
-  /*box-shadow: 9px 7px 10px -6px rgba(0, 0, 0, 0.25);*/
+  box-shadow: 9px 7px 10px -6px rgba(0, 0, 0, 0.25);
 }
 .nav-fix{
   position: fixed;
@@ -20,8 +20,8 @@
   padding: 0 75px;
 }
 .header-row-5co a{
-  font-family: 'PT Sans', sans-serif;
-  color: #828989;
+  font-family: 'Didact Gothic', sans-serif;
+  color: #DADFD3 ;
   font-size: 16px;
 }
 .nav-li-items div {
@@ -29,7 +29,7 @@
 }
 .nav-li-items a {
   font-weight: 500;
-  transition: color 300ms 0s ease;
+  transition: color 300ms ease;
   letter-spacing: 1px;
   line-height: 1.5;
   /*cursor: pointer;*/
@@ -63,10 +63,44 @@
   background: linear-gradient(90deg, #1e2931 0%, #384c59 75%);
 }
 .chat-layout-wrapper .left{
-  height: 100%;
+  height: calc(100vh - 100px);
   width: 300px;
   z-index: 5;
+  top: 100px;
+  padding-top: 30px;
+  /*margin-top: 50px;*/
   position: absolute;
+}
+.left .left-list{
+  padding: 16px 0 16px 67px;
+  margin-left: 3px;
+  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+  background: transparent;
+  border-left:3px solid #1e2931;
+}
+.left-list h3{
+  /*font-family: 'Dosis', sans-serif;*/
+  font-family: 'Didact Gothic', sans-serif;
+  color: #9c9c9c;
+  margin: 0;
+  font-weight: 300;
+  font-size:18px;
+}
+.left .left-list:hover{
+  background-color: #2c3c46;
+  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+  border-left: 3px solid #1c8d72;
+}
+.left .left-list:hover > h3{
+  color: #ffffff;
+}
+.left .abs-bottom{
+  padding-top: 40px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #2c3c46;
 }
 .ti-icons{
   margin: 25px auto;
@@ -107,8 +141,7 @@
   padding: 100px;
 }
 .result-wrapper{
-  margin: 50px;
-  font-family: Roboto,Helvetica Neue,sans-serif;
+  margin: 50px 50px 0px 50px;
 }
 .result-card{
   box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.75);
@@ -141,17 +174,20 @@
   font-weight: 600;
 }
 .result-wrapper p, .result-wrapper span, .result-wrapper h3{
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
   color: #dedede;
 }
-.result-card .text-wrapper{
-
+.text-wrapper{
+  width: 220px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .text-wrapper h3{
-  font-family: Roboto,Helvetica Neue,sans-serif;
-  color: #dedede;
+      color: #fff;
   font-weight: 300;
-  text-overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .result-card .bootom p{
   font-family: 'Open Sans Condensed', sans-serif;

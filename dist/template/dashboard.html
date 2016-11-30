@@ -19,22 +19,50 @@
       </div>
     </nav>
     <div layout="row" class="chat-layout-wrapper">
-      <div class="left"layout="row" hide-sm hide-xs>
+      <div class="left"layout="column" hide-sm hide-xs>
+        <div style="padding-bottom:40px;border-bottom:1px solid #585858">
+          <div class="left-list">
+            <h3>My Collection</h3>
+          </div>
+          <div class="left-list">
+            <h3>Trending Movies</h3>
+          </div>
+          <div class="left-list">
+            <h3>New Movies</h3>
+          </div>
+          <div class="left-list">
+            <h3>Watch later</h3>
+          </div>
+        </div>
+        <div style="padding-top:40px;">
+          <div class="left-list">
+            <h3>Recommendations</h3>
+          </div>
+          <div class="left-list">
+            <h3>Top Geners</h3>
+          </div>
+          <div class="left-list">
+            <h3>Artist of the Month</h3>
+          </div>
+        </div>
+        <div class="abs-bottom" >
+        </div>
       </div>
       <div class="right" flex hide-sm hide-xs>
         <div  layout="row"layout-wrap layout-align="start start" >
           <!-- <img src="http://image.tmdb.org/t/p/original/{{queryData.backdrop_path}}"/> -->
           <div class="result-wrapper" ng-repeat="result in results">
             <div class="result-card" >
-              <img src="http://image.tmdb.org/t/p/w342/{{result.poster_path}}" />
+              <img ng-if="result.poster_path!=''" src="http://image.tmdb.org/t/p/w342/{{result.poster_path}}" />
+              <img ng-if="result.poster_path==''" src="images/user.svg" />
               <!-- <p ng-if="result.media_type!='movie'">{{result.name}}</p>
               <p ng-if="result.media_type=='movie'">{{result.title}}</p> -->
-              <div class="rating"><p>{{result.popularity | number:1}}</p></div>
+              <div class="rating"><p>{{result.vote_average | number:1}}</p></div>
             </div>
             <div class="bottom" layout="column">
               <div class='text-wrapper'>
                 <h3 ng-if="result.media_type!='movie'">{{result.name}}</h3>
-                <h3 ng-if="result.media_type=='movie'">{{result.title}}</h3>
+                <h3>{{result.title}}</h3>
               </div>
               <p></p>
             </div>
