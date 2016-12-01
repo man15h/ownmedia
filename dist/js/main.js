@@ -125,7 +125,7 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
     });
   }
 });
-app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$mdDialog','$window','$http', '$log','$document','Auth', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$mdDialog,$window,$http, $log,$document,Auth) {
+app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$mdDialog','$window','$http', '$log','$document','Auth','$firebaseArray', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$mdDialog,$window,$http, $log,$document,Auth,$firebaseArray) {
   $scope.results=[];
    Auth.$onAuthStateChanged(function(firebaseUser) {
      $scope.firebaseUser = firebaseUser;
@@ -138,7 +138,13 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
            $location.path("/");
        }
      });
-   }
+   };
+   var userId = firebase.auth().currentUser.uid;
+   var collection = firebase.database().ref('/users/'+userId+'/collection');
+   $scope.collection = new $firebaseArray(collection);
+   $scope.collection.$loaded().then(function(collection){
+     console.log($scope.collection.length);
+   });
     var $apiEndpoint  = 'https://api.themoviedb.org/3/',
     $apiKey = 'b902673ede213dbd0636564e16adedc2',
     $error_noData = 'Uups! No connection to the database.';
@@ -173,6 +179,36 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
     $scope.getPopular=function () {
        $scope.searchPopular();
     }
+    $scope.myCollection=function () {
+      $scope.collection = new $firebaseArray(collection);
+      $scope.my_collection=[]
+      $scope.collection.$loaded().then(function(collection) {
+         console.log($scope.collection.length);
+         var results=$scope.collection
+         for (var k=0; k<results.length; k++){
+           var id=results[k].imdb_id;
+           $url = $apiEndpoint;
+           $url += ('find/'+id);
+          $http({
+               method: 'GET',
+               url: $url,
+               params: {
+                  api_key: $apiKey,
+                  external_source:'imdb_id'
+                }
+             }).then(function successCallback(response) {
+                 console.log(response);
+                 $scope.my_collection.push(response.data.movie_results[0]);
+
+                 console.log($scope.my_collection);
+               }, function errorCallback(response) {
+                 console.log(response);
+           });
+         };
+
+         $scope.results=$scope.my_collection;
+      });
+    };
    $scope.searchQuery=function (search) {
       $url = $apiEndpoint;
       $url += 'search/multi';
@@ -284,14 +320,21 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
    };
    $scope.userDetails=function (ev) {
        $mdDialog.show({
-         controller: function ($mdDialog,Auth) {
-                     Auth.$onAuthStateChanged(function(firebaseUser) {
-                       $scope.firebaseUser = firebaseUser;
-                     });
-                     console.log($scope.firebaseUser.email);
+         controller: function ($mdDialog,Auth,$firebaseArray,$firebaseObject) {
+                    var firebaseUser = firebase.auth().currentUser;
+                     console.log(firebaseUser.email);
                     var vm = this;
                     vm.user = {};
                     vm.email=$scope.firebaseUser.email;
+                    $scope.writeUserData=function(user) {
+                      console.log("ho ra hai");
+                      console.log(user);
+                      firebase.database().ref('users/'+firebaseUser.uid).set({
+                        username: user.name,
+                        department : user.department,
+                        address:user.address
+                      });
+                    };
                     $scope.hide = function () {
                         $mdDialog.hide();
                     };
@@ -310,21 +353,9 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
        }, function() {
        });
    };
-
-
-
-
-
-
-
-
-
-
-
     $scope.searchPopular();
 }]);
 app.controller("detailCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$window','$http', '$log','$document','Auth', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$window,$http, $log,$document,Auth) {
-  console.log(currentAuth);
   $scope.detail=$rootScope.detailResult;
   $scope.fullDetail=[];
   var $apiEndpoint  = 'https://api.themoviedb.org/3/',
@@ -355,6 +386,13 @@ app.controller("detailCtrl", ['currentAuth','$scope','$rootScope', '$routeParams
            console.log(response);
      });
    }
+   $scope.addCollection=function(content){
+     var user = firebase.auth().currentUser;
+     firebase.database().ref('users/' +user.uid+'/collection').push({
+       tmdb_id: content.id,
+       imdb_id: content.imdb_id,
+     });
+   };
    $scope.fetchFullData();
    console.log( $scope.fullDetail);
 }]);

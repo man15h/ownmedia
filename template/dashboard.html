@@ -21,16 +21,16 @@
     <div layout="row" class="chat-layout-wrapper">
       <div class="left"layout="column" hide-sm hide-xs>
         <div style="padding-bottom:40px;border-bottom:1px solid #585858">
-          <div class="left-list">
-            <h3>My Collection</h3>
+          <div class="left-list" ng-click="myCollection();">
+            <h3>My Collection <span style="float: right;color: #fff;">{{collection.length}}</span></h3>
           </div>
-          <div class="left-list" ng-click="getPopular()">
+          <div class="left-list" ng-click="getPopular();">
             <h3>Popular Movies</h3>
           </div>
-          <div class="left-list" ng-click="nowPlaying()">
+          <div class="left-list" ng-click="nowPlaying();">
             <h3>Now Playing</h3>
           </div>
-          <div class="left-list" ng-click="upcoming()">
+          <div class="left-list" ng-click="upcoming();">
             <h3>Upcoming</h3>
           </div>
           <div class="left-list">
@@ -41,7 +41,7 @@
           <div class="left-list">
             <h3>Recommendations</h3>
           </div>
-          <div class="left-list" ng-cilck="getTopRated()">
+          <div class="left-list" ng-cilck="getTopRated();">
             <h3>Top Rated</h3>
           </div>
           <div class="left-list">

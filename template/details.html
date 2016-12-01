@@ -14,6 +14,7 @@
       <h3>{{fullDetail.title}}</h3>
       <div class='release-genre' layout="row" layout-align="center center">
         <span>{{fullDetail.release_date |  date:'yyyy'}}</span>
+        <span ng-click="addCollection(fullDetail);">Add to Collection</span>
         <p ng-repeat="genre in fullDetail.genres">{{genre.name}}</p>
       </div>
       <div class="overview">
