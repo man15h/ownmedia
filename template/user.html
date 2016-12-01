@@ -1,0 +1,58 @@
+<md-dialog>
+  <div class="user-form-wrapper" layout="row">
+      <div style="width:100%;margin:50px;" layout="column" layout-align='start center'>
+        <div class="log-in" layout="column" layout-align='center center' style="max-height:100px;">
+          <h2>Details</h2>
+        </div>
+        <div class="form" style="width:100%;">
+          <form name='myform' class="sign-up-formyes">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Email</label>
+              <md-icon md-svg-src="images/email.svg" class="name"></md-icon>
+              <input  placeholder="" name="name" type="text" ng-model="infomodal.email" disabled="">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Name</label>
+              <md-icon style="height:23px;width:23px;" md-svg-src="images/contact.svg" class="name"></md-icon>
+              <input  placeholder="" name="name" type="text" ng-model="user.name" value="" required >
+              <div ng-messages="myForm.name.$error">
+                <div ng-message="required">Name is required.</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Department</label>
+              <md-icon md-svg-src="images/department.svg" class="name"></md-icon>
+              <input  placeholder="" name="name" type="text" ng-model="user.department" value="">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Address</label>
+              <md-icon style="height:26px;width:26px;" md-svg-src="images/address.svg" class="name"></md-icon>
+              <input  placeholder="" name="name" type="text" ng-model="user.address" value="">
+            </md-input-container>
+            <div  layout="column">
+              <button class="login-btn" ng-click="saveUser(user)" >Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </md-dialog>
+  <style>
+.user-form-wrapper{
+  background: #F1F3F7;
+  width: 400px;
+  height: 550px;
+  position: relative;
+}
+md-icon {
+    margin: auto;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor;
+    height: 20px;
+    width: 20px;
+     min-height: 18px !important;
+     min-width: 18px !important;
+}
+  </style>

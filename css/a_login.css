@@ -3,20 +3,16 @@ a {
     outline: none;
     border: 0;
 }
-input{
+input,a,div{
   outline: none;
 }
 a {
   text-decoration: none;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
-*{
-  font-family: 'Roboto Mono', monospace;
-}
 body{
   background-image: url('../images/group.png');
   background-attachment: fixed;
-  font-family: 'Roboto Mono', monospace;
 }
 
 .not-visible {

@@ -1,0 +1,24 @@
+<section class="detail-section">
+  <img src="https://image.tmdb.org/t/p/original/{{fullDetail.backdrop_path}}" style="margin-left:350px;"width="100%" height="auto"/>
+  <div  class="detail-overlay" flex layout="row">
+    <div class="left-panel">
+    </div>
+    <div class="arrow-right"></div>
+  </div>
+  <div  class="detail-wrapper container" flex layout="row" layout-align="center center">
+    <div flex="80" class="deta89_uy" layout="column" layout-align="start start">
+      <div class="rating-dis" layout="row" layout-align="center center">
+        <img src="images/heart.svg"/>
+        <h4>{{fullDetail.vote_average}}</h4>
+      </div>
+      <h3>{{fullDetail.title}}</h3>
+      <div class='release-genre' layout="row" layout-align="center center">
+        <span>{{fullDetail.release_date |  date:'yyyy'}}</span>
+        <p ng-repeat="genre in fullDetail.genres">{{genre.name}}</p>
+      </div>
+      <div class="overview">
+        <span>{{fullDetail.overview}}</span>
+      </div>
+    </div>
+  </div>
+</section>

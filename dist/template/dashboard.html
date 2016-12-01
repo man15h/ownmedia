@@ -3,7 +3,7 @@
     <nav class="navbar-wrap" layout="row" hide-sm hide-xs >
      <div layout="row" layout-align="center center" flex	class="header-row-5co">
        <div flex="20">
-    		 <a href="#/">Hello, </br>{{ firebaseUser.email }}</a>
+    		 <a href="" ng-click="userDetails($event);">Hello, </br>{{firebaseUser.email}}</a>
     	 </div>
        <div class="bottom" flex="60"layout="row" layout-align="center center">
          <div flex="85">
@@ -24,11 +24,14 @@
           <div class="left-list">
             <h3>My Collection</h3>
           </div>
-          <div class="left-list">
-            <h3>Trending Movies</h3>
+          <div class="left-list" ng-click="getPopular()">
+            <h3>Popular Movies</h3>
           </div>
-          <div class="left-list">
-            <h3>New Movies</h3>
+          <div class="left-list" ng-click="nowPlaying()">
+            <h3>Now Playing</h3>
+          </div>
+          <div class="left-list" ng-click="upcoming()">
+            <h3>Upcoming</h3>
           </div>
           <div class="left-list">
             <h3>Watch later</h3>
@@ -38,8 +41,8 @@
           <div class="left-list">
             <h3>Recommendations</h3>
           </div>
-          <div class="left-list">
-            <h3>Top Geners</h3>
+          <div class="left-list" ng-cilck="getTopRated()">
+            <h3>Top Rated</h3>
           </div>
           <div class="left-list">
             <h3>Artist of the Month</h3>
@@ -52,19 +55,22 @@
         <div  layout="row"layout-wrap layout-align="start start" >
           <!-- <img src="http://image.tmdb.org/t/p/original/{{queryData.backdrop_path}}"/> -->
           <div class="result-wrapper" ng-repeat="result in results">
-            <div class="result-card" >
+            <div class="result-card" ng-click="fetchDetail(result)">
               <img ng-if="result.poster_path!=''" src="http://image.tmdb.org/t/p/w342/{{result.poster_path}}" />
               <img ng-if="result.poster_path==''" src="images/user.svg" />
               <!-- <p ng-if="result.media_type!='movie'">{{result.name}}</p>
               <p ng-if="result.media_type=='movie'">{{result.title}}</p> -->
               <div class="rating"><p>{{result.vote_average | number:1}}</p></div>
             </div>
-            <div class="bottom" layout="column">
+            <div class="bottom" layout="column" ng-click="fetchDetail(result)">
               <div class='text-wrapper'>
-                <h3 ng-if="result.media_type!='movie'">{{result.name}}</h3>
-                <h3>{{result.title}}</h3>
+                <h3 ng-if="result.media_type!='movie'">{{result.title}}</h3>
+                <h3 ng-if="result.media_type=='movie'">{{result.title}}</h3>
+                <h3>{{result.name}}</h3>
               </div>
-              <p></p>
+              <div style="max-width:180px;overflow:hidden;">
+                <span ng-repeat="genre in result.genre track by $index" ng-if="$index<2">{{genre}} </span>
+              </div>
             </div>
           </div>
         </div>

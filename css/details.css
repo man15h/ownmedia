@@ -1,0 +1,87 @@
+.detail-section{
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+.detail-overlay{
+  color: white;
+  position: absolute;;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  height: 100vh;
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+}
+.left-panel{
+  height: 100vh;
+  width: 350px;
+  background-color:  #0c0b0c;
+}
+.arrow-right {
+  width: 0;
+  height: 0;
+  width: 0;
+  height: 0;
+  border-top: 50vh solid transparent;
+  border-bottom: 50vh solid transparent;
+  border-left: 450px solid #0c0b0c;
+  box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
+}
+.detail-wrapper{
+  position: fixed;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  top: 0;
+  z-index: 20;
+  max-width: 1000px;
+}
+.detail-wrapper h3, .detail-wrapper h4, .detail-wrapper h5{
+  font-family: 'Roboto', sans-serif;
+}
+.deta89_uy{
+  height: 700px;
+}
+.rating-dis{
+  margin: 16px 0;
+}
+.rating-dis img{
+  height: 50px;
+  width: 50px;
+}
+.rating-dis h4{
+  color: #fff;
+  font-size: 20px;
+  margin: 0 0 0 10px;
+}
+.deta89_uy h3{
+  color: #fff;
+  max-width: 500px;
+  font-weight: 500;
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+}
+.release-genre span{
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  padding: 2px 5px;
+  background: white;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+.release-genre p{
+  color: #b5b5b5;
+  padding-right: 5px;
+  font-size: 18;
+}
+.deta89_uy .overview{
+  margin: 30px 0;
+}
+.overview span{
+  font-size: 18px;
+  line-height: 1.33em;
+  color: #dadada;
+  max-width: 400px;
+  font-family: 'PT Sans', sans-serif;
+}
