@@ -2,12 +2,15 @@
   <div  class="chat-section"layout="column">
     <div layout="row" class="chat-layout-wrapper">
       <div class="left"layout="column" hide-sm hide-xs>
-        <div class="user-info" layout="column" layout-align="center center">
-          <a href="" ng-click="userDetails($event);">Hello, </br>{{firebaseUser.email}}</a>
+        <div class="user-info" layout="row" layout-align="center center">
+            <img src="images/usericon.png" >
+            <div layout="column" style="margin-left:16px;">
+              <a href="" ng-click="userDetails($event);">Hello, </br>{{userDetails.username}}</a>
+            </div>
         </div>
         <div style="padding-bottom:40px;border-bottom:1px solid #585858">
           <div class="left-list" ng-click="myCollection();">
-            <h3>My Collection <span style="float: right;color: #dedede;margin-right: 16px">{{collection.length}}</span></h3>
+            <h3>My Collection <span style="float: right;color: #dedede;margin-right: 16px;padding: 0px 12px;border-radius: 10px;background:#C7433B;">{{collection.length}}</span></h3>
           </div>
           <div class="left-list" ng-click="getPopular();">
             <h3>Popular Movies</h3>
@@ -19,7 +22,7 @@
             <h3>Upcoming</h3>
           </div>
           <div class="left-list" ng-click="watchLater();">
-            <h3>Watch later <span style="float: right;color: #dedede;margin-right: 16px">{{watch_later.length}}</span></h3>
+            <h3>Watch later <span style="float: right;color: #dedede;margin-right: 16px;padding: 0px 12px;border-radius: 10px;background:#C7433B;">{{watch_later.length}}</span></h3>
           </div>
         </div>
         <div style="padding-top:40px;">

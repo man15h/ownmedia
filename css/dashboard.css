@@ -75,6 +75,13 @@
   background: #C7433B ;
   font-family: 'Source Sans Pro', sans-serif;
 }
+.user-info img{
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: white;
+  border: 1px solid white;
+}
 .user-info a{
   color: #fff;
   opacity: 0.89;

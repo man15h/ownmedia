@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ngRoute','ngMaterial','ngAnimate','duScroll','angular-scroll-animate','firebase']);
 app.config(function($mdThemingProvider) {
-  $mdThemingProvider.setDefaultTheme('none');
+   $mdThemingProvider.disableTheming();
 });
 app.factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
@@ -90,8 +90,9 @@ app.config(["$routeProvider", function($routeProvider) {
     }
   });
 }]);
-app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$http,$sce,$window,$http, $log,$document,Auth,$firebaseAuth) {
+app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$http,$sce,$mdDialog,$window,$http, $log,$document,Auth,$firebaseAuth) {
   $scope.loginForm=true;
+  $scope.passwordResetUi='password-show';
   $scope.signUp=function () {
     $scope.loginForm=false;
     $scope.loginSignupToggle='yes';
@@ -102,13 +103,50 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
   else if(Auth.$getAuth()==null){
     $location.path("/");
   }
-  $scope.createUser = function(email,password) {
+  $scope.forgetPassword=function (ev) {
+    $scope.passwordResetUi='password-hide';
+    $mdDialog.show({
+      controller: function ($mdDialog,Auth,$firebaseArray,$firebaseObject) {
+                 $scope.passwordReset = function(email){
+                     console.log("made in to auth method for reset passowrd with email - " + email);
+                     Auth.$sendPasswordResetEmail(email).then(function() {
+                       console.log("Password reset email sent successfully!");
+                     }).catch(function(error) {
+                       console.error("Error: ", error);
+                     });
+
+                 };
+                 $scope.hide = function () {
+                     $mdDialog.hide();
+                 };
+                 $scope.cancel = function () {
+                   $mdDialog.cancel();
+                 };
+             },
+      controllerAs: 'passwordmodal',
+      templateUrl: 'template/password.html',
+      targetEvent: ev,
+      parent: angular.element(document.body),
+      clickOutsideToClose:true,
+      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    })
+    .then(function(answer) {
+        $scope.passwordResetUi='password-show';
+    }, function() {
+      $scope.passwordResetUi='password-show';
+    });
+  };
+  $scope.createUser = function(user) {
     $scope.message = null;
     $scope.error = null;
     // Create a new user
-    Auth.$createUserWithEmailAndPassword(email, password)
+    Auth.$createUserWithEmailAndPassword(user.email, user.password)
       .then(function(firebaseUser) {
         $scope.message = "User created with uid: " + firebaseUser.uid;
+        firebase.database().ref('users/'+firebaseUser.uid+'/details/').set({
+            username: user.name
+          });
+        $location.path("/home");
       }).catch(function(error) {
         $scope.error = error;
       });
@@ -123,14 +161,51 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
       var errorCode = error.code;
       var errorMessage = error.message;
     });
-  }
+  };
+  $scope.signInWithGoogle=function () {
+    Auth.$signInWithPopup("google").then(function(result) {
+      console.log("Signed in as:", result.user.uid);
+      $location.path("/home");
+    }).catch(function(error) {
+      console.error("Authentication failed:", error);
+    });
+  };
+  $scope.signInWithFacebook=function () {
+    Auth.$signInWithPopup("facebook").then(function(result) {
+      console.log("Signed in as:", result.user.uid);
+      $location.path("/home");
+    }).catch(function(error) {
+      console.error("Authentication failed:", error);
+    });
+  };
+  $scope.signInWithTwitter=function () {
+    Auth.$signInWithPopup("twitter").then(function(result) {
+      console.log("Signed in as:", result.user.uid);
+      $location.path("/home");
+    }).catch(function(error) {
+      console.error("Authentication failed:", error);
+    });
+  };
+  $scope.signInWithGithub=function () {
+    Auth.$signInWithPopup("github").then(function(result) {
+      console.log("Signed in as:", result.user.uid);
+      $location.path("/home");
+    }).catch(function(error) {
+      console.error("Authentication failed:", error);
+    });
+  };
+
 });
 app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$mdDialog','$window','$http', '$log','$document','Auth','$firebaseArray', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$mdDialog,$window,$http, $log,$document,Auth,$firebaseArray) {
   $scope.results=[];
   $scope.loadingAnimation='out';
    Auth.$onAuthStateChanged(function(firebaseUser) {
      $scope.firebaseUser = firebaseUser;
-     console.log($scope.firebaseUser);
+     var userDetails = firebase.database().ref('/users/'+firebaseUser.uid);
+     $scope.userDetails = new $firebaseArray(userDetails);
+     $scope.userDetails.$loaded().then(function(userDetails){
+       $scope.userDetails=$scope.userDetails[0];
+     });
    });
    $scope.signOut=function () {
      Auth.$signOut();
