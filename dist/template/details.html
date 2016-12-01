@@ -12,9 +12,12 @@
         <h4>{{fullDetail.vote_average}}</h4>
       </div>
       <h3>{{fullDetail.title}}</h3>
+      <div class='col-watc'>
+        <md-button class="login-btn collection-btn" ng-click="addCollection(fullDetail);" ><i class="ti-flag-alt"></i>Collection</md-button>
+        <md-button  class="login-btn watch-btn collection-btn" ng-click="addWatchLater(fullDetail);" ><i class="ti-time"></i>Watch Later</md-button>
+      </div>
       <div class='release-genre' layout="row" layout-align="center center">
         <span>{{fullDetail.release_date |  date:'yyyy'}}</span>
-        <span ng-click="addCollection(fullDetail);">Add to Collection</span>
         <p ng-repeat="genre in fullDetail.genres">{{genre.name}}</p>
       </div>
       <div class="overview">

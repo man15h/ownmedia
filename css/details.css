@@ -33,13 +33,13 @@
 .detail-wrapper{
   position: fixed;
   height: 100vh;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   top: 0;
   z-index: 20;
   max-width: 1000px;
 }
 .detail-wrapper h3, .detail-wrapper h4, .detail-wrapper h5{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 .deta89_uy{
   height: 700px;
@@ -61,14 +61,41 @@
   max-width: 500px;
   font-weight: 500;
   font-size: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 .release-genre span{
   font-family: Roboto,Helvetica Neue,sans-serif;
-  padding: 2px 5px;
-  background: white;
+  padding: 5px 10px;
+  background: #e2e2e2;
   border-radius: 2px;
+  font-size: 14px;
   margin-right: 10px;
+}
+.col-watc{
+  color: #fff;
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+.col-watc .watch-btn{
+  margin-left: 20px;
+  border: 2px solid #fff;
+  background: #fff;
+  color: #C7433B;
+}
+.collection-btn{
+  width: 150px;
+  height: 30px;
+}
+.ti-flag-alt{
+  font-size: 16px;
+  color: #fff;
+  margin-right: 7px;
+}
+.ti-time{
+  font-size: 16px;
+  color: #b5b5b5;
+  margin-right: 7px;
 }
 .release-genre p{
   color: #b5b5b5;
@@ -83,5 +110,5 @@
   line-height: 1.33em;
   color: #dadada;
   max-width: 400px;
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }

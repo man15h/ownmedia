@@ -1,28 +1,13 @@
 <section>
   <div  class="chat-section"layout="column">
-    <nav class="navbar-wrap" layout="row" hide-sm hide-xs >
-     <div layout="row" layout-align="center center" flex	class="header-row-5co">
-       <div flex="20">
-    		 <a href="" ng-click="userDetails($event);">Hello, </br>{{firebaseUser.email}}</a>
-    	 </div>
-       <div class="bottom" flex="60"layout="row" layout-align="center center">
-         <div flex="85">
-           <input class="input__field input__field--kyo" ng-model="query" type="text" id="input-19" />
-         </div>
-         <div flex='15' layout="row" layout-align="center center">
-           <a class="sent-btn" ng-click="searchQuery(query);"><img src='../images/sent.svg' height="40" width="40"></i></a>
-         </div>
-       </div>
-        <div flex="20" layout="row" layout-align="center center" class="nav-li-items">
-          <div class="li-item-1" ><a ng-click="signOut()" style="" du-smooth-scroll du-scrollspy >Sign Out</a></div>
-        </div>
-      </div>
-    </nav>
     <div layout="row" class="chat-layout-wrapper">
       <div class="left"layout="column" hide-sm hide-xs>
+        <div class="user-info" layout="column" layout-align="center center">
+          <a href="" ng-click="userDetails($event);">Hello, </br>{{firebaseUser.email}}</a>
+        </div>
         <div style="padding-bottom:40px;border-bottom:1px solid #585858">
           <div class="left-list" ng-click="myCollection();">
-            <h3>My Collection <span style="float: right;color: #fff;">{{collection.length}}</span></h3>
+            <h3>My Collection <span style="float: right;color: #dedede;margin-right: 16px">{{collection.length}}</span></h3>
           </div>
           <div class="left-list" ng-click="getPopular();">
             <h3>Popular Movies</h3>
@@ -33,8 +18,8 @@
           <div class="left-list" ng-click="upcoming();">
             <h3>Upcoming</h3>
           </div>
-          <div class="left-list">
-            <h3>Watch later</h3>
+          <div class="left-list" ng-click="watchLater();">
+            <h3>Watch later <span style="float: right;color: #dedede;margin-right: 16px">{{watch_later.length}}</span></h3>
           </div>
         </div>
         <div style="padding-top:40px;">
@@ -52,6 +37,21 @@
         </div>
       </div>
       <div class="right" flex hide-sm hide-xs>
+        <nav class="navbar-wrap " layout="row" hide-sm hide-xs >
+         <div layout="row" layout-align="center center" flex	class="header-row-5co">
+           <div class="bottom" flex="60"layout="row" layout-align="center center">
+             <div flex="85">
+               <input class="input__field input__field--kyo" ng-model="query" type="text" id="input-19" />
+             </div>
+             <div flex='15' layout="row" layout-align="center center">
+               <a class="sent-btn" ng-click="searchQuery(query);"><img src='../images/sent.svg' height="40" width="40"></i></a>
+             </div>
+           </div>
+            <div flex="20" layout="row" layout-align="center center" class="nav-li-items">
+              <div class="li-item-1" ><a ng-click="signOut()" style="" du-smooth-scroll du-scrollspy >Sign Out</a></div>
+            </div>
+          </div>
+        </nav>
         <div  layout="row"layout-wrap layout-align="start start" >
           <!-- <img src="http://image.tmdb.org/t/p/original/{{queryData.backdrop_path}}"/> -->
           <div class="result-wrapper" ng-repeat="result in results">
@@ -70,6 +70,7 @@
               </div>
               <div style="max-width:180px;overflow:hidden;">
                 <span ng-repeat="genre in result.genre track by $index" ng-if="$index<2">{{genre}} </span>
+                <span ng-repeat="genre in result.genres track by $index" ng-if="$index<2">{{genre.name}} </span>
               </div>
             </div>
           </div>

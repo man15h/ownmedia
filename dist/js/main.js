@@ -145,6 +145,11 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
    $scope.collection.$loaded().then(function(collection){
      console.log($scope.collection.length);
    });
+   var watch_later= firebase.database().ref('/users/'+userId+'/watch_later');
+   $scope.watch_later = new $firebaseArray(watch_later);
+   $scope.watch_later.$loaded().then(function(watch_later){
+     console.log($scope.watch_later.length);
+   });
     var $apiEndpoint  = 'https://api.themoviedb.org/3/',
     $apiKey = 'b902673ede213dbd0636564e16adedc2',
     $error_noData = 'Uups! No connection to the database.';
@@ -182,23 +187,22 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
     $scope.myCollection=function () {
       $scope.collection = new $firebaseArray(collection);
       $scope.my_collection=[]
+      // TODO: mycollection only showing movies not tv series or something
       $scope.collection.$loaded().then(function(collection) {
          console.log($scope.collection.length);
          var results=$scope.collection
          for (var k=0; k<results.length; k++){
-           var id=results[k].imdb_id;
+           var id=results[k].tmdb_id;
            $url = $apiEndpoint;
-           $url += ('find/'+id);
+           $url += ('movie/'+id);
           $http({
                method: 'GET',
                url: $url,
                params: {
-                  api_key: $apiKey,
-                  external_source:'imdb_id'
+                  api_key: $apiKey
                 }
              }).then(function successCallback(response) {
-                 console.log(response);
-                 $scope.my_collection.push(response.data.movie_results[0]);
+                 $scope.my_collection.push(response.data);
 
                  console.log($scope.my_collection);
                }, function errorCallback(response) {
@@ -207,6 +211,35 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
          };
 
          $scope.results=$scope.my_collection;
+      });
+    };
+    $scope.watchLater=function () {
+      $scope.watch_later = new $firebaseArray(watch_later);
+      $scope.my_watch_later=[]
+      // TODO: mywatch_later only showing movies not tv series or something
+      $scope.watch_later.$loaded().then(function(watch_later) {
+         console.log($scope.watch_later.length);
+         var results=$scope.watch_later
+         for (var k=0; k<results.length; k++){
+           var id=results[k].tmdb_id;
+           $url = $apiEndpoint;
+           $url += ('movie/'+id);
+          $http({
+               method: 'GET',
+               url: $url,
+               params: {
+                  api_key: $apiKey
+                }
+             }).then(function successCallback(response) {
+                 $scope.my_watch_later.push(response.data);
+
+                 console.log($scope.my_watch_later);
+               }, function errorCallback(response) {
+                 console.log(response);
+           });
+         };
+
+         $scope.results=$scope.my_watch_later;
       });
     };
    $scope.searchQuery=function (search) {
@@ -327,6 +360,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
                     vm.user = {};
                     vm.email=$scope.firebaseUser.email;
                     $scope.writeUserData=function(user) {
+                      // FIXME:this function not working
                       console.log("ho ra hai");
                       console.log(user);
                       firebase.database().ref('users/'+firebaseUser.uid).set({
@@ -388,7 +422,14 @@ app.controller("detailCtrl", ['currentAuth','$scope','$rootScope', '$routeParams
    }
    $scope.addCollection=function(content){
      var user = firebase.auth().currentUser;
-     firebase.database().ref('users/' +user.uid+'/collection').push({
+     firebase.database().ref('users/' +user.uid+'/collection/'+content.id).set({
+       tmdb_id: content.id,
+       imdb_id: content.imdb_id,
+     });
+   };
+   $scope.addWatchLater=function(content){
+     var user = firebase.auth().currentUser;
+     firebase.database().ref('users/' +user.uid+'/watch_later/'+content.id).set({
        tmdb_id: content.id,
        imdb_id: content.imdb_id,
      });

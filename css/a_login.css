@@ -162,7 +162,7 @@ body{
   position: relative;
   left: -1px;
   opacity: 0.7;
-  font-family: "Roboto Mono",Roboto,sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   /*font-family: 'Jura', sans-serif;*/
 }
 .login-form-wrapper .form{
@@ -173,7 +173,7 @@ body{
   color: #8ad499;
   letter-spacing: 3px;
   text-transform: uppercase;
-  font-family: "Roboto Mono",Roboto,sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
 }
 .login-btn{
@@ -185,14 +185,14 @@ body{
   right: 0;
   bottom: 0;
   font-size: 14px;
-  border: 2px solid #FE174F;
+  border: 2px solid #C7433B;
   color: #fff;
-  background: #FE174F;
+  background: #C7433B;
   white-space: nowrap;
   overflow: hidden;
   font-weight: 600;
   border-radius: 50px;
-    font-family: "Roboto Mono",Roboto,sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   transition: all 0.5s cubic-bezier(.25,.8,.25,1);
 /* -webkit-animation: over 6s infinite; */
 }
@@ -216,7 +216,7 @@ body{
   text-align: justify;
 }
 .sign-up-wrapper .desc-txt span{
-  font-size: 14px;
+  font-size: 18px;
   color: #9A9DA7;
 }
 .sign-up-btn{
@@ -235,6 +235,6 @@ body{
   overflow: hidden;
   font-weight: 600;
   border-radius: 50px;
-    font-family: "Roboto Mono",Roboto,sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   transition: all 0.5s cubic-bezier(.25,.8,.25,1);
 }

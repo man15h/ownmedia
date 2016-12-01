@@ -3,11 +3,10 @@
   overflow: hidden;
 }
 .navbar-wrap {
-  height: 100px;
+  height: 70px;
   width: 100%;
   position: fixed;
   z-index:20;
-  background: linear-gradient(90deg, #1e2931 0%, #384c59 75%);
   transition: all ease-in .3s;
   box-shadow: 9px 7px 10px -6px rgba(0, 0, 0, 0.25);
 }
@@ -20,7 +19,7 @@
   padding: 0 75px;
 }
 .header-row-5co a{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #DADFD3 ;
   font-size: 16px;
 }
@@ -63,16 +62,26 @@
   background: linear-gradient(90deg, #1e2931 0%, #384c59 75%);
 }
 .chat-layout-wrapper .left{
-  height: calc(100vh - 100px);
-  width: 300px;
+  width: 250px;
   z-index: 5;
-  top: 100px;
-  padding-top: 30px;
+  height: 100vh;
+  top:0px;
+  box-shadow: 9px 7px 10px -6px rgba(0, 0, 0, 0.25);
   /*margin-top: 50px;*/
   position: absolute;
 }
+.user-info{
+  height: 100px;
+  padding: 16px;
+  background: #C7433B ;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.user-info a{
+  color: #fff;
+  opacity: 0.89;
+}
 .left .left-list{
-  padding: 16px 0 16px 67px;
+  padding: 13px 0 13px 37px;
   margin-left: 3px;
   transition: all 0.5s cubic-bezier(.25,.8,.25,1);
   background: transparent;
@@ -81,16 +90,16 @@
 }
 .left-list h3{
   /*font-family: 'Dosis', sans-serif;*/
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #9c9c9c;
   margin: 0;
   font-weight: 300;
-  font-size:18px;
+  font-size:16px;
 }
 .left .left-list:hover{
   background-color: #2c3c46;
   transition: all 0.5s cubic-bezier(.25,.8,.25,1);
-  border-left: 3px solid #1c8d72;
+  border-left: 3px solid #C7433B;
 }
 .left .left-list:hover > h3{
   color: #ffffff;
@@ -100,7 +109,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 100px;
+  height: 50px;
   background-color: #2c3c46;
 }
 .ti-icons{
@@ -124,8 +133,8 @@
 .chat-layout-wrapper .right{
   /*background: #2D3840 ;*/
   position: relative;
-  top: 100px;
-  left: 300px;
+  top: 70px;
+  left: 250px;
   margin-right: 150px;
   padding-bottom: 150px;
   overflow: auto;
@@ -142,7 +151,7 @@
   padding: 100px;
 }
 .result-wrapper{
-  margin: 50px 50px 0px 50px;
+  margin: 35px 25px 0px 50px;
 }
 .result-wrapper .bottom{
   cursor: pointer;
@@ -178,7 +187,7 @@
   font-weight: 600;
 }
 .result-wrapper p, .result-wrapper span, .result-wrapper h3{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #dedede;
 }
 .text-wrapper{
