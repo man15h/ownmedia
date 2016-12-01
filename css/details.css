@@ -28,7 +28,6 @@
   border-top: 50vh solid transparent;
   border-bottom: 50vh solid transparent;
   border-left: 450px solid #0c0b0c;
-  box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
 }
 .detail-wrapper{
   position: fixed;

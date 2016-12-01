@@ -40,19 +40,23 @@
         <nav class="navbar-wrap " layout="row" hide-sm hide-xs >
          <div layout="row" layout-align="center center" flex	class="header-row-5co">
            <div class="bottom" flex="60"layout="row" layout-align="center center">
-             <div flex="85">
-               <input class="input__field input__field--kyo" ng-model="query" type="text" id="input-19" />
+             <div flex="85" layout="row">
+               <md-input-container class="md-block search-input" flex-gt-sm>
+                 <label>Search...</label>
+                 <md-icon class="name"><i class="ti-search"></i></md-icon>
+                 <input  style="border:0;color:#FBFBFA;"name="name" ng-model="query" type="text" >
+               </md-input-container>
              </div>
              <div flex='15' layout="row" layout-align="center center">
-               <a class="sent-btn" ng-click="searchQuery(query);"><img src='../images/sent.svg' height="40" width="40"></i></a>
+               <md-button style="background:none;border:0;"class="login-btn" ng-click="searchQuery(query);">search</md-button>
              </div>
            </div>
             <div flex="20" layout="row" layout-align="center center" class="nav-li-items">
-              <div class="li-item-1" ><a ng-click="signOut()" style="" du-smooth-scroll du-scrollspy >Sign Out</a></div>
+              <div class="li-item-1" ><a ng-click="signOut()" style="" du-smooth-scroll du-scrollspy ><md-button class="login-btn sign-out" ng-click="writeUserData(user);" >Sign Out</md-button></a></div>
             </div>
           </div>
         </nav>
-        <div  layout="row"layout-wrap layout-align="start start" >
+        <div  layout="row" layout-wrap layout-align="start start" >
           <!-- <img src="http://image.tmdb.org/t/p/original/{{queryData.backdrop_path}}"/> -->
           <div class="result-wrapper" ng-repeat="result in results">
             <div class="result-card" ng-click="fetchDetail(result)">

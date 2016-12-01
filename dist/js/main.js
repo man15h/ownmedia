@@ -95,7 +95,7 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
   $scope.signUp=function () {
     $scope.loginForm=false;
     $scope.loginSignupToggle='yes';
-  }
+  };
   if(Auth.$getAuth()){
     $location.path("/home");
   }
@@ -127,6 +127,7 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
 });
 app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$mdDialog','$window','$http', '$log','$document','Auth','$firebaseArray', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$mdDialog,$window,$http, $log,$document,Auth,$firebaseArray) {
   $scope.results=[];
+  $scope.loadingAnimation='out';
    Auth.$onAuthStateChanged(function(firebaseUser) {
      $scope.firebaseUser = firebaseUser;
      console.log($scope.firebaseUser);
@@ -155,6 +156,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
     $error_noData = 'Uups! No connection to the database.';
     var $url = $apiEndpoint;
     $scope.searchPopular=function () {
+      $scope.loadingAnimation='out';
       $url = $apiEndpoint;
       $url += 'movie/popular';
       $http({
@@ -176,6 +178,8 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
                    };
              };
              console.log($scope.results);
+
+             $scope.loadingAnimation='in';
            }, function errorCallback(response) {
              console.log(response);
        });
@@ -185,6 +189,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
        $scope.searchPopular();
     }
     $scope.myCollection=function () {
+      $scope.loadingAnimation='out';
       $scope.collection = new $firebaseArray(collection);
       $scope.my_collection=[]
       // TODO: mycollection only showing movies not tv series or something
@@ -203,7 +208,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
                 }
              }).then(function successCallback(response) {
                  $scope.my_collection.push(response.data);
-
+                 $scope.loadingAnimation='in';
                  console.log($scope.my_collection);
                }, function errorCallback(response) {
                  console.log(response);
@@ -214,6 +219,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
       });
     };
     $scope.watchLater=function () {
+      $scope.loadingAnimation='out';
       $scope.watch_later = new $firebaseArray(watch_later);
       $scope.my_watch_later=[]
       // TODO: mywatch_later only showing movies not tv series or something
@@ -232,7 +238,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
                 }
              }).then(function successCallback(response) {
                  $scope.my_watch_later.push(response.data);
-
+                 $scope.loadingAnimation='in';
                  console.log($scope.my_watch_later);
                }, function errorCallback(response) {
                  console.log(response);
@@ -243,6 +249,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
       });
     };
    $scope.searchQuery=function (search) {
+     $scope.loadingAnimation='out';
       $url = $apiEndpoint;
       $url += 'search/multi';
      $http({
@@ -264,6 +271,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
                     };
               };
               console.log($scope.results);
+              $scope.loadingAnimation='in';
           }, function errorCallback(response) {
             console.log(response);
       });
@@ -297,6 +305,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
      });
    };
    $scope.upcoming=function () {
+     $scope.loadingAnimation='out';
      $url = $apiEndpoint;
      $url += 'movie/upcoming';
     $http({
@@ -317,11 +326,13 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
                    };
              };
              console.log($scope.results);
+             $scope.loadingAnimation='in';
          }, function errorCallback(response) {
            console.log(response);
      });
    };
    $scope.nowPlaying=function () {
+     $scope.loadingAnimation='out';
      var $url = $apiEndpoint;
      $url += 'movie/now_playing';
     $http({
@@ -342,7 +353,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
                  };
            };
             console.log(results);
-
+            $scope.loadingAnimation='in';
          }, function errorCallback(response) {
            console.log(response);
      });
