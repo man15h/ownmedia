@@ -1,29 +1,85 @@
-# README #
+## OwnMedia ##
 
-This README would normally document whatever steps are necessary to get your application up and running.
+OwnMedia is a angular version of ownmedia-iitd/proxyfreeiitd as name suggest but this webapp don't include links to Copyrighted content. purpose of this project to explore tmdb API with Firebase. 
 
-### What is this repository for? ###
+### Before setup the project ###
+* Ubuntu 14.04 or higher (16.04 recommended)
+* Git
+* Text editor (atom recommended)
+* Money to buy frappe
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### This project based on ###
 
-### How do I get set up? ###
+1. AngularJS
+1. AngularFire
+1. Angular Material
+1. Firebase
+1. TMDB API
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
 
-### Contribution guidelines ###
+###Running Locally###
 
-* Writing tests
-* Code review
-* Other guidelines
+*Get TMDB API to setup as your own project. and create a Firebase project on firebase console after that replace initialize
+script in index.html . Voila!*
 
-### Who do I talk to? ###
+####Note: Node.js is required. So install node.js first (https://nodejs.org/en/download/).####
 
-* Repo owner or admin
-* Other community or team contact
+```
+#!zsh
+
+$ sudo apt-get install nodejs 
+$ sudo apt-get install npm
+```
+
+
+```
+#!zsh
+
+$ npm install -g npm
+```
+ (use sudo if it says permission denied)
+
+
+```
+#!zsh
+
+$ npm install -g bower
+```
+ (use sudo if it says permission denied)
+
+
+```
+#!zsh
+
+$ npm install -g gulp
+```
+
+
+```
+#!zsh
+
+$ cd /ownmedia
+$ npm install bower
+$ npm install gulp
+```
+
+
+To run the project.
+
+
+```
+#!zsh
+
+$ gulp
+```
+
+#### Errors; ####
+
+1. npm ERR! argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "-g" "npm"
+
+
+```
+#!zsh
+
+$ sudo ln -s "$(which nodejs)" /usr/bin/node
+```
