@@ -1,6 +1,6 @@
 ## OwnMedia ##
 
-OwnMedia is a angular version of ownmedia-iitd/proxyfreeiitd as name suggest but this webapp don't include links to Copyrighted content. purpose of this project to explore tmdb API with Firebase. 
+OwnMedia is an angular version of ownmedia-iitd/proxyfreeiitd. simple webapp based on tmdb API with Firebase. 
 
 ### Before setup the project ###
 * Ubuntu 14.04 or higher (16.04 recommended)
