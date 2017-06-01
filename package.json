@@ -1,0 +1,38 @@
+{
+  "name": "ownmedia",
+  "version": "1.0.0",
+  "description": "Simple WebApp based on tmdb API with Firebase.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "del": "^2.2.2",
+    "dgeni": "^0.4.2",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-minify": "^0.0.14",
+    "gulp": "^3.9.1",
+    "gulp-compressor": "^0.1.0",
+    "gulp-jshint": "^2.0.2",
+    "gulp-uglifycss": "^1.0.6",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "run-sequence": "^1.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/man15h/ownmedia.git"
+  },
+  "author": "manish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/man15h/ownmedia/issues"
+  },
+  "homepage": "https://github.com/man15h/ownmedia#readme"
+}
