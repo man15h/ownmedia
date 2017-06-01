@@ -3,6 +3,13 @@
   overflow: hidden;
   width: 100%;
 }
+.detail-section .background{
+  webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
 .detail-overlay{
   color: white;
   position: absolute;;
@@ -10,10 +17,10 @@
   width: 100%;
   z-index: 10;
   height: 100vh;
-  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0,0.7)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0,0.7)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0,0.7)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0,0.7));
 }
 .left-panel{
   height: 100vh;
@@ -32,16 +39,38 @@
 .detail-wrapper{
   position: fixed;
   height: 100vh;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Varela Round', sans-serif;
   top: 0;
   z-index: 20;
-  max-width: 1000px;
+  width: 100%;
 }
 .detail-wrapper h3, .detail-wrapper h4, .detail-wrapper h5{
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Varela Round', sans-serif;
 }
 .deta89_uy{
-  height: 700px;
+  max-height: 700px;
+  max-width: 1000px;
+  padding: 16px;
+  margin: auto;
+  /*background: white;*/
+  border-radius: 16px;
+  box-shadow: 0 38px 43px rgba(0,0,0,.09);
+}
+.poster-path{
+  width:300px;
+  height:auto;
+}
+@media screen and (max-width: 900px) {
+  .poster-path{
+    width:250px;
+    height:auto;
+  }
+}
+@media screen and (max-width: 700px) {
+  .poster-path{
+    width:200px;
+    height:auto;
+  }
 }
 .rating-dis{
   margin: 16px 0;
@@ -59,8 +88,9 @@
   color: #fff;
   max-width: 500px;
   font-weight: 500;
+  margin: 0;
   font-size: 30px;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Varela Round', sans-serif;
 }
 .release-genre span{
   font-family: Roboto,Helvetica Neue,sans-serif;
@@ -85,16 +115,23 @@
 .collection-btn{
   width: 150px;
   height: 30px;
+  border-radius: 2px;
+  box-shadow: none;
 }
 .ti-flag-alt{
-  font-size: 16px;
+  font-size: 18px;
+  position: relative;
   color: #fff;
   margin-right: 7px;
+  top: 2px;
 }
 .ti-time{
   font-size: 16px;
   color: #b5b5b5;
   margin-right: 7px;
+}
+.release-genre{
+  margin-top: 10px;
 }
 .release-genre p{
   color: #b5b5b5;
@@ -109,5 +146,5 @@
   line-height: 1.33em;
   color: #dadada;
   max-width: 400px;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Varela Round', sans-serif;
 }

@@ -1,4 +1,45 @@
 <section>
+  <md-sidenav class="md-sidenav-left" md-component-id="left"
+  md-disable-backdrop md-whiteframe="4">
+  <div class="left"layout="column">
+    <div class="user-info" layout="row" layout-align="center center">
+      <img src="images/usericon.png" >
+      <div layout="column" style="margin-left:16px;">
+        <a href="" ng-click="userDetails($event);">Hello, </br>{{userDetails.username}}</a>
+      </div>
+    </div>
+    <div style="padding-bottom:40px;border-bottom:1px solid #e2e2e2">
+      <div class="left-list" ng-click="myCollection();">
+        <h3>My Collection <span style="float: right;color: #dedede;margin-right: 16px;padding: 0px 12px;border-radius: 10px;background:linear-gradient(90deg, #ec6e82, #fca13e);">{{collection.length}}</span></h3>
+      </div>
+      <div class="left-list" ng-click="getPopular();">
+        <h3>Popular Movies</h3>
+      </div>
+      <div class="left-list" ng-click="nowPlaying();">
+        <h3>Now Playing</h3>
+      </div>
+      <div class="left-list" ng-click="upcoming();">
+        <h3>Upcoming</h3>
+      </div>
+      <div class="left-list" ng-click="watchLater();">
+        <h3>Watch later <span style="float: right;color: #dedede;margin-right: 16px;padding: 0px 12px;border-radius: 10px;background:linear-gradient(90deg, #ec6e82, #fca13e);">{{watch_later.length}}</span></h3>
+      </div>
+    </div>
+    <div style="padding-top:40px;">
+      <div class="left-list">
+        <h3>Recommendations</h3>
+      </div>
+      <div class="left-list" ng-cilck="getTopRated();">
+        <h3>Top Rated</h3>
+      </div>
+      <div class="left-list">
+        <h3>Artist of the Month</h3>
+      </div>
+    </div>
+    <!-- <div class="abs-bottom" >
+  </div> -->
+</div>
+</md-sidenav>
   <div  class="chat-section"layout="column">
     <div layout="row" class="chat-layout-wrapper">
       <div class="left"layout="column" hide-sm hide-xs>
@@ -8,9 +49,9 @@
               <a href="" ng-click="userDetails($event);">Hello, </br>{{userDetails.username}}</a>
             </div>
         </div>
-        <div style="padding-bottom:40px;border-bottom:1px solid #585858">
+        <div style="padding-bottom:40px;border-bottom:1px solid #e2e2e2">
           <div class="left-list" ng-click="myCollection();">
-            <h3>My Collection <span style="float: right;color: #dedede;margin-right: 16px;padding: 0px 12px;border-radius: 10px;background:#C7433B;">{{collection.length}}</span></h3>
+            <h3>My Collection <span style="float: right;color: #dedede;margin-right: 16px;padding: 0px 12px;border-radius: 10px;background:linear-gradient(90deg, #ec6e82, #fca13e);">{{collection.length}}</span></h3>
           </div>
           <div class="left-list" ng-click="getPopular();">
             <h3>Popular Movies</h3>
@@ -22,7 +63,7 @@
             <h3>Upcoming</h3>
           </div>
           <div class="left-list" ng-click="watchLater();">
-            <h3>Watch later <span style="float: right;color: #dedede;margin-right: 16px;padding: 0px 12px;border-radius: 10px;background:#C7433B;">{{watch_later.length}}</span></h3>
+            <h3>Watch later <span style="float: right;color: #dedede;margin-right: 16px;padding: 0px 12px;border-radius: 10px;background:linear-gradient(90deg, #ec6e82, #fca13e);">{{watch_later.length}}</span></h3>
           </div>
         </div>
         <div style="padding-top:40px;">
@@ -36,27 +77,32 @@
             <h3>Artist of the Month</h3>
           </div>
         </div>
+        <a class="search-btn logout-btn" ng-click="signOut()">
+          <p>Logout</p>
+        </a>
         <div class="abs-bottom" >
         </div>
       </div>
-      <div class="right" flex hide-sm hide-xs>
-        <nav class="navbar-wrap " layout="row" hide-sm hide-xs >
+      <div class="right" flex>
+        <nav class="navbar-wrap " layout="row">
          <div layout="row" layout-align="center center" flex	class="header-row-5co">
-           <div class="bottom" flex="60"layout="row" layout-align="center center">
-             <div flex="85" layout="row">
+           <div class="bottom" flex-gt-md="60" flex="100" layout="row" layout-align="center center">
+             <div flex-gt-sm="60" flex="100" layout="row">
+               <md-button ng-click="toggleLeft()" hide-gt-sm class="md-accent">
+                 <i class="ti-menu"></i>
+               </md-button>
                <md-input-container class="md-block search-input" flex-gt-sm>
                  <label>Search...</label>
                  <md-icon class="name"><i class="ti-search"></i></md-icon>
-                 <input  style="border:0;color:#FBFBFA;"name="name" ng-model="query" type="text" >
+                 <input  style="border:0;color:#5a5a5a;"name="name" ng-model="query" type="text" >
                </md-input-container>
              </div>
-             <div flex='15' layout="row" layout-align="center center">
-               <md-button style="background:none;border:0;"class="login-btn" ng-click="searchQuery(query);">search</md-button>
+             <div flex-gt-sm='40' flex="60" layout="row" hide-sm hide-xs layout-align="start center">
+               <a class="search-btn" ng-click="searchQuery(query)">
+                <p>Search</p>
+               </a>
              </div>
            </div>
-            <div flex="20" layout="row" layout-align="center center" class="nav-li-items">
-              <div class="li-item-1" ><a ng-click="signOut()" style="" du-smooth-scroll du-scrollspy ><md-button class="login-btn sign-out" ng-click="writeUserData(user);" >Sign Out</md-button></a></div>
-            </div>
           </div>
         </nav>
         <div  layout="row" layout-wrap layout-align="start start" >

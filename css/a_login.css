@@ -11,7 +11,8 @@ a {
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 body{
-  background-image: url('../images/group.png');
+  /*background-image: url('../images/group.png');*/
+  background:  linear-gradient(90deg, #ec6e82, #fca13e);
   background-attachment: fixed;
 }
 
@@ -68,33 +69,39 @@ body{
   animation-name: fadeInUp;
 }
 
-.container{
-	margin-right:auto;
-	margin-left:auto;
-	padding-left:15px;
-	padding-right:15px;
-	}
-	@media (min-width:768px){
-		.container{width:750px;
-			}
-	}
-	@media (min-width:992px){
-		.container{
-			width:970px;
-			}
-	}
-	@media (min-width:1200px){
-		.container{
-			width:1170px;
-			}
-	}
-	.container-fluid{
-		margin-right:auto;
-		margin-left:auto;
-		padding-left:15px;
-		padding-right:15px;
-	}
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media screen and (min-width: 600px) {
+  .container {
+    width: 750px;
+  }
+}
+@media screen and (min-width: 960px) {
+  .container {
+    width: 970px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1170px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 1400px;
+  }
+}
 
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 /*login form starts here*/
 .login-section{
   height:100vh;
@@ -109,21 +116,23 @@ body{
   width: 1000px;
 }
 .login-form-wrapper .left{
-  background: #F1F3F7;
+  background: white;
   width: 40%;
   left: 0;
   height: 550px;
+  z-index: 5;
+  border-radius: 14px;
   position: relative;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, .18);
   transition: all 1s cubic-bezier(.25,.8,.25,1);
 
 }
 .login-form-wrapper .left-yes{
-  background: #F1F3F7;
+  background: #fff;
   width: 40%;
   z-index: 5;
   left: 308;
-  height: 600px;
+  height: 560px;
   position: relative;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, .18);
   transition: all 1s cubic-bezier(.25,.8,.25,1);
@@ -131,10 +140,13 @@ body{
 .login-form-wrapper .right{
   background:#2B3045 ;
   margin: 40 40 40 0;
+  position: relative;
+  left: -16px;
   width: 60%;
   opacity: 1;
   box-shadow: 10px 10px 25px 0 rgba(0, 0, 0, .18);
   transition: all 1s cubic-bezier(.25,.8,.25,1);
+  border-radius: 16px;
 }
 .login-form-wrapper .right-yes{
   z-index: 0;
@@ -157,50 +169,64 @@ body{
 }
 .log-in h2, .sign-up h2{
   letter-spacing: 1px;
-  font-weight:300;
+  font-weight:600;
   font-size: 32px;
   position: relative;
   left: -1px;
-  opacity: 0.7;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Nunito', sans-serif;
   /*font-family: 'Jura', sans-serif;*/
+}
+md-input-container.md-input-focused label:not(.md-no-float), md-input-container.md-input-has-placeholder label:not(.md-no-float), md-input-container.md-input-has-value label:not(.md-no-float){
+  font-family: 'Nunito', sans-serif;
+  color: #5a5a5a;
+}
+md-input-container .md-input-message-animation.ng-enter, md-input-container .md-input-message-animation:not(.ng-animate), md-input-container:not(.md-input-invalid) .md-auto-hide .md-input-message-animation{
+  color: #e53935;
 }
 .login-form-wrapper .form{
   padding: 0 50px 25px 50px;
+}
+md-input-container input[type=color], md-input-container input[type=date], md-input-container input[type=datetime-local], md-input-container input[type=datetime], md-input-container input[type=email], md-input-container input[type=month], md-input-container input[type=number], md-input-container input[type=password], md-input-container input[type=search], md-input-container input[type=tel], md-input-container input[type=text], md-input-container input[type=time], md-input-container input[type=url], md-input-container input[type=week], md-input-container textarea {
+  color: #5a5a5a;
+  font-family: 'Varela Round', sans-serif;
 }
 .log-in span, .recent-list-itm span{
   font-size: 14px;
   color: #8ad499;
   letter-spacing: 3px;
   text-transform: uppercase;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 300;
 }
 .login-btn{
-  width: 100px;
+  width: 200px;
   height: 40px;
   margin: auto;
   position: relative;
+  box-shadow: 0 2px 64px 0 rgba(208, 208, 208, 0.7);
   left: 0;
   right: 0;
   bottom: 0;
   font-size: 14px;
-  border: 2px solid #C7433B;
+  background: linear-gradient(90deg, #ec6e82, #fca13e);
   color: #fff;
-  background: #C7433B;
   white-space: nowrap;
   overflow: hidden;
   font-weight: 600;
   border-radius: 50px;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Nunito', sans-serif;
   transition: all 0.5s cubic-bezier(.25,.8,.25,1);
 /* -webkit-animation: over 6s infinite; */
+}
+.login-btn span{
+  position: relative;
+  /*top: 3px;*/
 }
 .forget-txt{
   padding: 30px 16px;
   margin: auto;
-  color: #9A9DA7 ;
-  font-family: 'Roboto Mono', monospace;
+  color: #52545a;
+  font-family: 'Nunito', sans-serif;
 }
 .ti-signup{
 font-size: 24px;
@@ -230,6 +256,7 @@ color: #adadad;
 }
 .sign-up h2{
   padding: 16px;
+  color: white;
 }
 .sign-up-wrapper .desc-txt{
   width: 70%;
@@ -238,24 +265,25 @@ color: #adadad;
 }
 .sign-up-wrapper .desc-txt span{
   font-size: 18px;
-  color: #9A9DA7;
+  color: #dcdee6;
+  font-family: 'Montserrat', sans-serif;
 }
 .sign-up-btn{
   margin: 30px auto;
-  width: 100px;
+  width: 200px;
   height: 40px;
   position: relative;
   left: 0;
   right: 0;
   bottom: 0;
   font-size: 14px;
-  border: 2px solid #9A9DA7;
-  color: #9A9DA7 ;
+  border: 2px solid #fff;
+  color: #fff ;
   background: none;
   white-space: nowrap;
   overflow: hidden;
   font-weight: 600;
   border-radius: 50px;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Nunito', sans-serif;
   transition: all 0.5s cubic-bezier(.25,.8,.25,1);
 }

@@ -97,12 +97,6 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
     $scope.loginForm=false;
     $scope.loginSignupToggle='yes';
   };
-  if(Auth.$getAuth()){
-    $location.path("/home");
-  }
-  else if(Auth.$getAuth()==null){
-    $location.path("/");
-  }
   $scope.forgetPassword=function (ev) {
     $scope.passwordResetUi='password-hide';
     $mdDialog.show({
@@ -157,7 +151,6 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
       $location.path("/home");
     })
     .catch(function(error) {
-
       var errorCode = error.code;
       var errorMessage = error.message;
     });
@@ -196,7 +189,7 @@ app.controller('myCtrl', function($scope,$rootScope, $routeParams, $location,$ht
   };
 
 });
-app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$mdDialog','$window','$http', '$log','$document','Auth','$firebaseArray', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$mdDialog,$window,$http, $log,$document,Auth,$firebaseArray) {
+app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$mdDialog','$window','$http', '$log','$document','Auth','$firebaseArray','$mdSidenav', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$mdDialog,$window,$http, $log,$document,Auth,$firebaseArray, $mdSidenav) {
   $scope.results=[];
   $scope.loadingAnimation='out';
    Auth.$onAuthStateChanged(function(firebaseUser) {
@@ -215,6 +208,14 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
        }
      });
    };
+   $scope.toggleLeft = buildToggler('left');
+   $scope.toggleRight = buildToggler('right');
+
+   function buildToggler(componentId) {
+     return function() {
+       $mdSidenav(componentId).toggle();
+     };
+   }
    var userId = firebase.auth().currentUser.uid;
    var collection = firebase.database().ref('/users/'+userId+'/collection');
    $scope.collection = new $firebaseArray(collection);
@@ -435,6 +436,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
    };
    $scope.fetchDetail=function(result){
      $rootScope.detailResult=result;
+     $window.localStorage["movieDetail"] = JSON.stringify(result);
      $location.path("/details");
    };
    $scope.userDetails=function (ev) {
@@ -476,7 +478,7 @@ app.controller("HomeCtrl", ['currentAuth','$scope','$rootScope', '$routeParams',
     $scope.searchPopular();
 }]);
 app.controller("detailCtrl", ['currentAuth','$scope','$rootScope', '$routeParams', '$location','$http','$sce','$window','$http', '$log','$document','Auth', function(currentAuth,$scope,$rootScope, $routeParams, $location,$http,$sce,$window,$http, $log,$document,Auth) {
-  $scope.detail=$rootScope.detailResult;
+  $scope.detail= JSON.parse($window.localStorage["movieDetail"]);
   $scope.fullDetail=[];
   var $apiEndpoint  = 'https://api.themoviedb.org/3/',
   $apiKey = 'b902673ede213dbd0636564e16adedc2',
